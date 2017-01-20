@@ -23,6 +23,8 @@ you're forced to live with it for a while.
 // Apply the java plugin to add support for Java
 apply plugin: 'java'
 apply plugin: 'pl.allegro.tech.build.axion-release'
+apply plugin: 'maven'
+apply plugin: 'signing'
 apply plugin: 'idea'
 
 scmVersion {
@@ -42,4 +44,79 @@ compileJava {
 sourceCompatibility = JavaVersion.VERSION_1_8
 targetCompatibility = JavaVersion.VERSION_1_8
 
-jar.baseName = "${rootProject.name}-${scmVersion.version}"
+
+task javadocJar(type: Jar) {
+    classifier = 'javadoc'
+    from javadoc
+}
+
+task sourcesJar(type: Jar) {
+    classifier = 'sources'
+    from sourceSets.main.allSource
+}
+
+artifacts {
+    archives javadocJar, sourcesJar
+}
+
+signing {
+    required {
+        !scmVersion.version.endsWith("SNAPSHOT") && gradle.taskGraph.hasTask("uploadArchives")
+    }
+    sign configurations.archives
+}
+
+group = "org.venth.tools"
+archivesBaseName = rootProject.name
+version = scmVersion.version
+
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
+
+            repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2/") {
+                authentication(
+                        userName: project.properties.get('ossrhUsername', ''),
+                        password: project.properties.get('ossrhPassword', '')
+                )
+            }
+
+            snapshotRepository(url: "https://oss.sonatype.org/content/repositories/snapshots/") {
+                authentication(
+                        userName: project.properties.get('ossrhUsername', ''),
+                        password: project.properties.get('ossrhPassword', '')
+                )
+            }
+
+            pom.project {
+                name rootProject.name
+                packaging 'jar'
+                // optionally artifactId can be defined here
+                description project.description
+
+                scm {
+                    connection 'scm:git:git://github.com/venth/latrine.git'
+                    developerConnection 'scm:git:ssh://github.com/venth/latrine.git'
+                    url 'https://github.com/venth/latrine'
+                }
+
+                licenses {
+                    license {
+                        name 'MIT License'
+                        url 'http://www.opensource.org/licenses/mit-license.php'
+                    }
+                }
+
+                developers {
+                    developer {
+                        id 'venth'
+                        name 'Artur Krysiak'
+                        email 'artur.krysiak.warszawa@gmail.com'
+                        organizationUrl 'https://github.com/venth'
+                    }
+                }
+            }
+        }
+    }
+}
