@@ -1,4 +1,9 @@
 language: java
 jdk:
   - oraclejdk8
+
+branches:
+  except:
+    - /^version\/[0-9a-z\-\.]*/
+
 script: ./gradlew clean build
