@@ -1,4 +1,4 @@
-package org.venth.tools.latrine;
+package com.github.venth.tools.latrine;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;

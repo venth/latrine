@@ -66,7 +66,7 @@ signing {
     sign configurations.archives
 }
 
-group = "org.venth.tools"
+group = 'com.github.venth.tools'
 archivesBaseName = rootProject.name
 version = scmVersion.version
 
