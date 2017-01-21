@@ -94,6 +94,7 @@ uploadArchives {
                 packaging 'jar'
                 // optionally artifactId can be defined here
                 description project.description
+                url 'https://github.com/venth/latrine'
 
                 scm {
                     connection 'scm:git:git://github.com/venth/latrine.git'
