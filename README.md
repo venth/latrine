@@ -15,3 +15,31 @@ decided to improve on marking such code by usage of ```@ShittyShit``` annotation
 If you're about to use this annotation, I feel sorry for you. Nevertheless please do not hesitate yourself to apply it to shitty code, which purpose to pull you out of the deep shit you're in.
 
 Just remember to provide explanation, otherwise a reader might think that you dragged him into a deep shit.
+
+Equipment applications latrine as follows:
+
+* gradle
+
+```
+compile 'com.github.venth.tools:latrine:x.y.z
+```
+
+* maven
+
+```
+<dependency>
+    <groupId>com.github.venth.tools</groupId>
+    <artifactId>latrine</artifactId>
+    <version>x.y.z</version>
+</dependency>
+```
+
+Then you can start marking introduced ```@ShittyShit``` and providing explanation how it pulled out
+the application from a deep shit.
+
+## Examples
+Few examples:
+* Fixing bug in a library which has a buggy final class by introduction
+  in application's code a class in the same package as the buggy one
+* Using reflection to access private, not exposed fields containing measures needed for monitoring
+  purposes
