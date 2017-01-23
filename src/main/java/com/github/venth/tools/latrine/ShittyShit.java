@@ -36,5 +36,5 @@ public @interface ShittyShit {
      * Short explanation of annotated code
      */
     String value () default "This is shameful piece of code. " +
-            "It's author is aware of it and plans fix it soon.";
+            "Its author is aware of it and plans fix it soon.";
 }
