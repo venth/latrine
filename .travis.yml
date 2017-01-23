@@ -4,20 +4,7 @@ jdk:
 
 branches:
   except:
-  # tell travis to ignore version pushes (because it's done by travis in after_success
+  # tell travis to ignore version pushes
     - /^version\/[0-9a-z\-\.]*/
 
 script: ./gradlew clean build
-
-after_success: |
-  # release only builds performed against master branch
-  if [ "${TRAVIS_BRANCH}" == "master" ]; then
-    git config --global user.email "builds@travis-ci.com"
-    git config --global user.name "Travis CI"
-    ./gradlew createRelease -Prelease.disableChecks
-    git push -q https://$TAGPERM@github.com/venth/latrine.git --tags
-  fi
-
-env:
-  global:
-    secure: "Utq3kmgfLzaBTYneBIaMF3K3ngVfEJbXMpddyyaDFCnMa4d2S0PUhyL9p8vtxYk9LuAwhQufHWlSbkg0ougbtPQKzaE6Go8kjxYwVKjXNiyTkdny8WrXd9vC2R71kdP4/AHwbEzTG/5b8WtB37r35tvl6HLxPR6SX6rEpd1abrnkg58kMn5BTunefeQKQUovF8wPnMKpzgqM0JLOZjocPmGBLhahMWYvepZcLd7iXTL0OJsAEXG5X/Z1LYOJJ6V9HGZ2u+wL3pUP2rMpjqgl4lof0WR5SVWNJEyd4uL4DPHzheVH0SUdDdrGoXzob4ihlOmUkoVJdOMiEKKTYtdCQUGIfxOxUuM6VUYJPawUoOMPdF0ocRuRd5OHxa2MVi+3e2nyWkR9a7jbH50nFRiwpSUcy/ZE+vLkDgpbzPuEtsQkrUw64/dEfvnHgtRV46/5Lu3jf67iySyfbMKAhLrb74BPjOq/KVDIEfxSk1XOec7m4FzKX5d7lFtTWkkAKP5XBqcWmDtm+CSaA4Nyc7m+ESr0x8zOCurVlJybPJrZYiItqDnTxdzxx5CzSzf27VmudEH3AdNNVwQ4Ow9e0U9xBHnZj4wTdto0i33PrbZUj2UWE0+0HNjLVFy7wBMafh/SFqqisJ25r0qazkX7Bd/4uFUFOSJPAoOjjbO8k2Xj9RE="
