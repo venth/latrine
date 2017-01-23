@@ -12,7 +12,7 @@ import java.lang.annotation.Target;
  * Created on 20/01/2017.
  */
 @Documented
-@Retention(RetentionPolicy.RUNTIME)
+@Retention(RetentionPolicy.SOURCE)
 @Target({
         ElementType.ANNOTATION_TYPE,
         ElementType.CONSTRUCTOR,
