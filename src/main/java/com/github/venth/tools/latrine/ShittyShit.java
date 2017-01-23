@@ -12,7 +12,7 @@ import java.lang.annotation.Target;
  * Created on 20/01/2017.
  */
 @Documented
-@Retention(RetentionPolicy.SOURCE)
+@Retention(RetentionPolicy.RUNTIME)
 @Target({
         ElementType.ANNOTATION_TYPE,
         ElementType.CONSTRUCTOR,
@@ -26,5 +26,15 @@ import java.lang.annotation.Target;
         ElementType.TYPE_USE
 })
 public @interface ShittyShit {
-    String value() default "Please provide explanation here";
+
+    /**
+     * Author of annotated code
+     */
+    String author () default "";
+
+    /**
+     * Short explanation of annotated code
+     */
+    String value () default "This is shameful piece of code. " +
+            "It's author is aware of it and plans fix it soon.";
 }
