@@ -28,13 +28,13 @@ import java.lang.annotation.Target;
 public @interface ShittyShit {
 
     /**
-     * Author of annotated code
+     * @return Author of annotated code
      */
-    String author () default "";
+    String author() default "";
 
     /**
-     * Short explanation of annotated code
+     * @return Short explanation of annotated code
      */
-    String value () default "This is shameful piece of code. " +
+    String value() default "This is shameful piece of code. " +
             "Its author is aware of it and plans fix it soon.";
 }
